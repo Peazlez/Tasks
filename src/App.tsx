@@ -6,7 +6,7 @@ function App(): React.JSX.Element {
     return(
         <div>
             {/* Heading Text */}
-            <h1>This is heading Text</h1>
+            <h1>Mason Peasley (COS 420)</h1>
 
             {/* image with alt text */}
             <h1>Hello World</h1>
@@ -21,8 +21,7 @@ function App(): React.JSX.Element {
             </ol>
 
             {/* Bootstrap button (Log Hello World) */}
-            <Button>Log Hello World</Button>
-            <Button onClick={ () => { console.log("Hello World!") } }>Click Me</Button>
+            <Button onClick={() => { console.log("Hello World!") } }>Click Me</Button>
 
             {/*Red Filled rectangle*/}
             <Container>
