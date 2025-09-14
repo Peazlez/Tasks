@@ -21,7 +21,7 @@ function App(): React.JSX.Element {
             </ol>
 
             {/* Bootstrap button (Log Hello World) */}
-            <Button onClick={() => { console.log("Hello World!") } }>Click Me</Button>
+            <Button onClick={() => { console.log("Log Hello World") } }>Click Me</Button>
 
             {/*Red Filled rectangle*/}
             <Container>
