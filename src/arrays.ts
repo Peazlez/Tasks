@@ -34,9 +34,11 @@ export function tripleNumbers(numbers: number[]): number[] {
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
-    
-
-    return [];
+    // create new array, run on each element, return new array
+    return numbers.map((str: string): number=>{
+        const parsed = parseInt(str, 10);
+        return isNaN(parsed) ? 0 : parsed;
+    })
 }
 
 /**
@@ -47,7 +49,11 @@ export function stringsToIntegers(numbers: string[]): number[] {
  */
 // Remember, you can write functions as lambdas too! They work exactly the same.
 export const removeDollars = (amounts: string[]): number[] => {
-    return [];
+        return amounts.map((amount: string): number => {
+            const noDollar = amount.startsWith('$') ? amount.slice(1) :amount;
+            const conversion = Number(noDollar);
+            return isNaN(conversion) ? 0 : conversion;
+        });
 };
 
 /**
@@ -56,7 +62,11 @@ export const removeDollars = (amounts: string[]): number[] => {
  * in question marks ("?").
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
-    return [];
+    // remove strings ending with '?'
+    const noMark = messages.filter((msg: string): boolean => !msg.endsWith("?"));
+    //map remaining while converting '!' strings to uppercase
+    const final = noMark.map((msg: string): string => msg.endsWith("!") ? msg.toUpperCase() : msg);
+    return final
 };
 
 /**
@@ -64,7 +74,8 @@ export const shoutIfExclaiming = (messages: string[]): string[] => {
  * 4 letters long.
  */
 export function countShortWords(words: string[]): number {
-    return 0;
+    let lessThanWords = words.filter((word: string): boolean => word.length < 4) 
+    return lessThanWords.length;
 }
 
 /**
@@ -73,7 +84,13 @@ export function countShortWords(words: string[]): number {
  * then return true.
  */
 export function allRGB(colors: string[]): boolean {
-    return false;
+    if(colors.length === 0){
+        return true
+    }
+    else{
+        let colorCheck = colors.every( (color: string): boolean => color === 'red'|| color === 'blue'|| color ==='green'); 
+    return colorCheck
+    }
 }
 
 /**
