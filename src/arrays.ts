@@ -126,12 +126,20 @@ export function makeMath(addends: number[]): string {
 export function injectPositive(values: number[]): number[] {
     const firstLowValuesIndex = values.findIndex((value: number): boolean => value < 0);
     let total = 0;
+
     if (firstLowValuesIndex !== -1){
         for (let i = 0 ; i < firstLowValuesIndex ; i++) 
             total += values[i];
-    }
+    
 
     const result = [...values];
-
-    return [];
+    result.splice(firstLowValuesIndex +1, 0, total)
+    return result;
+    }
+    
+    else{
+        let sum = values.reduce((currentTotal: number, num: number) => currentTotal + num,0,);
+        const newArray = [...values, sum]
+        return newArray
+    }
 }
