@@ -101,7 +101,17 @@ export function allRGB(colors: string[]): boolean {
  * And the array [] would become "0=0".
  */
 export function makeMath(addends: number[]): string {
-    return "";
+    // check for empty num array
+    if (addends.length === 0){
+        return "0=0"
+    }
+    // acquire total of nums in array
+    let sum = addends.reduce((currentTotal: number, num: number) => currentTotal+num, 0);
+    // create string of all nums "adding" together
+    const addendsStr = addends.join("+")
+    // return formatted answer 
+    // (Also could use backtick method?  like fstring (return `${sum}=${addendsStr}`))
+    return sum + "=" + addendsStr;
 }
 
 /**
@@ -114,5 +124,14 @@ export function makeMath(addends: number[]): string {
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
 export function injectPositive(values: number[]): number[] {
+    const firstLowValuesIndex = values.findIndex((value: number): boolean => value < 0);
+    let total = 0;
+    if (firstLowValuesIndex !== -1){
+        for (let i = 0 ; i < firstLowValuesIndex ; i++) 
+            total += values[i];
+    }
+
+    const result = [...values];
+
     return [];
 }
