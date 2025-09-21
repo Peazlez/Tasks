@@ -5,15 +5,20 @@
  * the number twice.
  */
 export function bookEndList(numbers: number[]): number[] {
+    // new array to work with
     let numArray: number[] = [];
+    // check for empty array
     if(numbers.length === 0){
         return numArray
     }
+    // check for only one element
     else if(numbers.length === 1){
+        // add same element into array twice
         numArray.splice(0,0,numbers[0])
         numArray.splice(1,0,numbers[0])
     }
     else {
+        // add first and last element
         numArray.splice(0,0,numbers[0])
         numArray.splice(1,0,numbers[numbers.length-1])
     }
@@ -25,6 +30,7 @@ export function bookEndList(numbers: number[]): number[] {
  * number has been tripled (multiplied by 3).
  */
 export function tripleNumbers(numbers: number[]): number[] {
+    // use map method to triple each num in array
     let newArray = numbers.map((price: number): number => price *3);
     return newArray;
 }
@@ -36,7 +42,9 @@ export function tripleNumbers(numbers: number[]): number[] {
 export function stringsToIntegers(numbers: string[]): number[] {
     // create new array, run on each element, return new array
     return numbers.map((str: string): number=>{
+        // cast int to string
         const parsed = parseInt(str, 10);
+        // use isNaN to check if parsed is a number, if not return 0
         return isNaN(parsed) ? 0 : parsed;
     })
 }
@@ -74,6 +82,7 @@ export const shoutIfExclaiming = (messages: string[]): string[] => {
  * 4 letters long.
  */
 export function countShortWords(words: string[]): number {
+    // sift through list adding 1 to lessThanWords if a word is less than 4 letters
     let lessThanWords = words.filter((word: string): boolean => word.length < 4) 
     return lessThanWords.length;
 }
@@ -84,10 +93,12 @@ export function countShortWords(words: string[]): number {
  * then return true.
  */
 export function allRGB(colors: string[]): boolean {
+    // return "true" if array is empty
     if(colors.length === 0){
         return true
     }
     else{
+        // checks for 'red' or 'blue' or 'green' and returns true if all elements are one of these three
         let colorCheck = colors.every( (color: string): boolean => color === 'red'|| color === 'blue'|| color ==='green'); 
     return colorCheck
     }
@@ -124,21 +135,28 @@ export function makeMath(addends: number[]): string {
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
 export function injectPositive(values: number[]): number[] {
+    // find first element less than 0
     const firstLowValuesIndex = values.findIndex((value: number): boolean => value < 0);
     let total = 0;
 
+    // if negative value is found
     if (firstLowValuesIndex !== -1){
         for (let i = 0 ; i < firstLowValuesIndex ; i++) 
+            // add all elements prior to negative element
             total += values[i];
     
-
+    // clone original array
     const result = [...values];
+    //splice total into spot after negative value
     result.splice(firstLowValuesIndex +1, 0, total)
     return result;
     }
-    
+
+    // if negative value is not found
     else{
+        // add all values in array together
         let sum = values.reduce((currentTotal: number, num: number) => currentTotal + num,0,);
+        // add sum to end of array
         const newArray = [...values, sum]
         return newArray
     }
