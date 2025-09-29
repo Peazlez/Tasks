@@ -72,7 +72,9 @@ export function isValid(question: Question, answer: string): boolean {
  * name "My First Question" would become "9: My First Q".
  */
 export function toShortForm(question: Question): string {
-    return "";
+    const shortName = question.name.slice(0, 10)
+    let newStr = question.id + ": " + shortName
+    return newStr;
 }
 
 /**
@@ -93,7 +95,15 @@ export function toShortForm(question: Question): string {
  * Check the unit tests for more examples of what this looks like!
  */
 export function toMarkdown(question: Question): string {
-    return "";
+    let formatStr = "# " + question.name + "\n";
+    formatStr += question.body; 
+
+    if(question.type === "multiple_choice_question"){
+        for (let i = 0 ; i < question.options.length ; i++){
+            formatStr += "\n- " + question.options[i]
+        }
+    }
+    return formatStr;
 }
 
 /**
