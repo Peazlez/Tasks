@@ -31,14 +31,14 @@ export function makeBlankQuestion(
  * HINT: Look up the `trim` and `toLowerCase` functions.
  */
 export function isCorrect(question: Question, answer: string): boolean {
-    answer = answer.toLowerCase()
-    answer = answer.trim()
+    answer = answer.toLowerCase();
+    answer = answer.trim();
 
-    let expected = question.expected.toLowerCase()
-    expected = expected.trim()
+    let expected = question.expected.toLowerCase();
+    expected = expected.trim();
 
     if (answer === expected){
-        return true
+        return true;
     }
     else{
         return false;
@@ -52,7 +52,17 @@ export function isCorrect(question: Question, answer: string): boolean {
  * be exactly one of the options.
  */
 export function isValid(question: Question, answer: string): boolean {
-    return false;
+    if (question.type === "short_answer_question"){
+        return true;
+    }
+    else{
+        if(question.options.includes(answer)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
 
 /**
