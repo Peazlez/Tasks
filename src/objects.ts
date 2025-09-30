@@ -31,15 +31,19 @@ export function makeBlankQuestion(
  * HINT: Look up the `trim` and `toLowerCase` functions.
  */
 export function isCorrect(question: Question, answer: string): boolean {
+    // trim and cast answer to lower case
     answer = answer.toLowerCase();
     answer = answer.trim();
 
+    // trim and cast expected to lower case
     let expected = question.expected.toLowerCase();
     expected = expected.trim();
 
+    // check for equality, if same, return true
     if (answer === expected){
         return true;
     }
+    // answer not equal, return false
     else{
         return false;
     }
@@ -52,13 +56,17 @@ export function isCorrect(question: Question, answer: string): boolean {
  * be exactly one of the options.
  */
 export function isValid(question: Question, answer: string): boolean {
+    // check question type, if short answer, any answer is valid, return true
     if (question.type === "short_answer_question"){
         return true;
     }
+    //else its a multiple choice
     else{
+        //check if answer matches any option, if it does, return true
         if(question.options.includes(answer)){
             return true;
         }
+        //doesnt match, return false
         else{
             return false;
         }
@@ -72,7 +80,9 @@ export function isValid(question: Question, answer: string): boolean {
  * name "My First Question" would become "9: My First Q".
  */
 export function toShortForm(question: Question): string {
+    // slice orignal question.name to only include first ten characters
     const shortName = question.name.slice(0, 10)
+    // format new string
     let newStr = question.id + ": " + shortName
     return newStr;
 }
@@ -95,10 +105,14 @@ export function toShortForm(question: Question): string {
  * Check the unit tests for more examples of what this looks like!
  */
 export function toMarkdown(question: Question): string {
+    //format first line
     let formatStr = "# " + question.name + "\n";
+    //format second line with body
     formatStr += question.body; 
 
+    // check for question type for next level formatting
     if(question.type === "multiple_choice_question"){
+        //if multiple choice, add each option on newline
         for (let i = 0 ; i < question.options.length ; i++){
             formatStr += "\n- " + question.options[i]
         }
@@ -111,7 +125,9 @@ export function toMarkdown(question: Question): string {
  * `newName`.
  */
 export function renameQuestion(question: Question, newName: string): Question {
+    // create a copy of original question into new variable
     let question1 = {...question}
+    //alter name of new question
     question1.name = newName
     return question1;
 }
@@ -122,7 +138,9 @@ export function renameQuestion(question: Question, newName: string): Question {
  * published; if it was published, now it should be not published.
  */
 export function publishQuestion(question: Question): Question {
+    // copy original question to new variable
     let newQuestion = {...question};
+    // "flip" published to true or false
     newQuestion.published = !question.published;
     return newQuestion;
 }
@@ -134,6 +152,7 @@ export function publishQuestion(question: Question): Question {
  * The `published` field should be reset to false.
  */
 export function duplicateQuestion(id: number, oldQuestion: Question): Question {
+    // create newerQuestion, copying over variables that remain the same and altering ones that need to change
     let newerQuestion = {...oldQuestion,
         id: id,
         name: "Copy of " + oldQuestion.name,
@@ -150,7 +169,9 @@ export function duplicateQuestion(id: number, oldQuestion: Question): Question {
  * Check out the subsection about "Nested Fields" for more information.
  */
 export function addOption(question: Question, newOption: string): Question {
+    // create new copy of original question
     let question2 = {...question,
+        //alter new array to include newOption on the end
         options: [...question.options, newOption] }
     return question2;
 }
