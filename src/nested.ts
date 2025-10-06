@@ -1,5 +1,6 @@
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
+import {makeBlankQuestion} from "./objects";
 
 /**
  * Consumes an array of questions and returns a new array with only the questions
@@ -79,7 +80,13 @@ export function makeAnswers(questions: Question[]): Answer[] {
  * Hint: as usual, do not modify the input questions array
  */
 export function publishAll(questions: Question[]): Question[] {
-    return [];
+    const publishedQuestions = questions.map(
+        (question:Question): Question => ({
+            ...question,
+            published: true
+        })
+    )
+    return publishedQuestions
 }
 
 /***
@@ -94,7 +101,8 @@ export function addNewQuestion(
     name: string,
     type: QuestionType
 ): Question[] {
-    return [];
+    const newQuestion = makeBlankQuestion(id, name, type);
+    return [...questions, newQuestion];
 }
 
 /***
@@ -109,7 +117,12 @@ export function renameQuestionById(
     targetId: number,
     newName: string
 ): Question[] {
-    return [];
+    return questions.map(
+        (question:Question): Question =>
+            question.id === targetId 
+                ? {...question, name: newName }
+                : question
+    )
 }
 
 /**
@@ -130,5 +143,25 @@ export function editOption(
     targetOptionIndex: number,
     newOption: string
 ): Question[] {
-    return [];
+    return questions.map((question: Question): Question => {
+        // not the right question
+        if (question.id !== targetId){
+            return question;
+        }
+
+        let newOptions: string[];
+
+        if (targetOptionIndex === -1) {
+            // add newOption to end
+            newOptions = [...question.options, newOption];
+        }
+        else{
+            newOptions = [...question.options];
+
+            if (targetOptionIndex >= 0 && targetOptionIndex < newOptions.length){
+                newOptions[targetOptionIndex] = newOption;
+            }
+        }
+        return {...question, options:newOptions};
+    })
 }
