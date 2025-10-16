@@ -1,6 +1,10 @@
 import React from "react";
 import "./App.css";
 import {Button, Container, Row, Col} from 'react-bootstrap';
+import { ChangeType } from "./components/ChangeType";
+import { RevealAnswer } from "./components/RevealAnswer";
+import { TwoDice } from "./components/TwoDice";
+import { Counter } from "./components/Counter";
 
 function App(): React.JSX.Element {
     return (
