@@ -12,15 +12,18 @@ export function d6(): number {
 }
 
 export function TwoDice(): React.JSX.Element {
+    //use states for individual dice
     const [value, setValue] = useState<number>(1);
     const [value1, setValue1] = useState<number>(2);
-
+    
+    // game state logic Booleans for easier message handling showing "Win" or "Lose"
     const isSnakeEyes = value ===1 && value1 === 1;
     const isWin = value === value1 && !isSnakeEyes && value !== 0;
 
         return (
             <div>
                 <span>
+                    {/*Left Button*/}
                     <Button
                         onClick={() => {
                             setValue(d6());
@@ -29,6 +32,7 @@ export function TwoDice(): React.JSX.Element {
                         Roll Left
                     </Button>
                     <span data-testid="left-die"> to {value}.</span>
+                    {/*Right Button*/}
                     <Button
                         onClick={() => {
                             setValue1(d6());
@@ -38,6 +42,7 @@ export function TwoDice(): React.JSX.Element {
                     </Button>
                     <span data-testid="right-die">to {value1}.</span>
                 </span>
+                {/* Win/Lose Messages, render null if no win or lose */}
                 <div>
                     {isSnakeEyes ?
                         <span>Lose</span>
@@ -47,7 +52,6 @@ export function TwoDice(): React.JSX.Element {
                 </div>
             </div>
         );
-    //return <div>Two Dice</div>;
 }
 
 // The TwoDice component will simulate a game where you roll two dice in an attempt to get matching values. 
