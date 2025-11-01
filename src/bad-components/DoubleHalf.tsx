@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 
-
 export function DoubleHalf(): React.JSX.Element {
-    const [dhValue, setDhValue] = useState<number>(20);
+    const [dhValue, setDhValue] = useState<number>(10);
 
     function Doubler(): React.JSX.Element {
         return (
             <Button
+                className = "btn btn-primary"
+                type = "button"
                 onClick={() => {
-                    setDhValue(2 * dhValue);
+                    setDhValue(oldValue => 2 * oldValue);
                 }}
             >
                 Double
@@ -20,8 +21,10 @@ export function DoubleHalf(): React.JSX.Element {
     function Halver(): React.JSX.Element {
         return (
             <Button
+                className = "btn btn-primary"
+                type = "button"
                 onClick={() => {
-                    setDhValue(0.5 * dhValue);
+                    setDhValue(oldValue => 0.5 * oldValue);
                 }}
             >
                 Halve
