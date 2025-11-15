@@ -21,11 +21,22 @@ HINT: If an element is rendered not visible, then a test looking for it will fai
 */
 
 export function EditMode(): React.JSX.Element {
-    const [isEditMode, setIsEditMode] = useState<boolean>(true);
+    const [isEditMode, setIsEditMode] = useState<boolean>(false);
+    const [userName, setUserName] = useState<string>("Your Name");
+    const [isStudent, setIsStudent] = useState<boolean>(true);
 
     function toggleEditMode(event: React.ChangeEvent<HTMLInputElement>){
         setIsEditMode(event.target.checked)
     }
+
+    function toggleisStudent(event: React.ChangeEvent<HTMLInputElement>){
+    setIsStudent(event.target.checked)
+    }
+
+    function updateUserName(event: React.ChangeEvent<HTMLInputElement>){
+    setUserName(event.target.value)
+    }
+    
     return (
         <div>
             <Form.Check
@@ -35,7 +46,28 @@ export function EditMode(): React.JSX.Element {
             checked={isEditMode}
             onChange={toggleEditMode}
             />
-            <h3>Edit Mode</h3>
+            {isEditMode ? (
+                <div>
+                    <Form.Group controlId="userNameInput">
+                        <Form.Label>User Name: </Form.Label>
+                        <Form.Control
+                            value={userName}
+                            onChange={updateUserName}/>
+                    </Form.Group>
+
+                    <Form.Check
+                        type="checkbox"
+                        id="is-student-checkbox"
+                        label="Student?"
+                        checked={isStudent}
+                        onChange={toggleisStudent}
+                    />
+                </div>
+            ) : (
+                <div>
+                    {userName} is {isStudent ? "" : "not "}a student.
+                </div>
+            )}
         </div>
     );
 }
